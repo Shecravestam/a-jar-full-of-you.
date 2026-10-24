@@ -1,0 +1,117 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f9e7f0">
+<title>A Jar Full of You 💌</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#fff9fc;color:#57475a;font-family:Georgia,serif}
+header{text-align:center;padding:32px 18px 22px;background:linear-gradient(145deg,#f9e4ef,#e3efff)}
+h1{font-size:clamp(30px,8vw,43px);margin:10px 0;color:#986d91}
+header p{line-height:1.7;margin:8px auto;max-width:320px}
+.sticker{font-size:27px;letter-spacing:8px}
+main{max-width:520px;margin:auto;padding:18px}
+.paper{background:#fff;border:1px solid #f0dce9;border-radius:20px;padding:20px;margin:16px 0;box-shadow:0 5px 16px #bd98b31b}
+h2{color:#9a7197;font-size:23px;margin:0 0 12px}
+button{border:0;border-radius:22px;padding:13px 17px;background:#e8dafa;color:#644f78;font-size:15px;font-weight:bold;cursor:pointer;margin:5px 3px}
+button:active{transform:scale(.97)}
+.primary{background:#f3d5e5;color:#875a78}
+.jar{font-size:72px;text-align:center;margin:8px}
+#note{background:#fff6fb;border:1px dashed #d9afcd;padding:20px;border-radius:15px;line-height:1.8;text-align:center;min-height:90px;margin:12px 0}
+.pill{background:#e7efff;color:#61749d}
+.hidden{display:none}
+footer{text-align:center;padding:24px;color:#a68ba4;font-size:13px}
+</style>
+</head>
+<body>
+<header>
+  <div class="sticker">♡ ✦ 🎀 ✦ ♡</div>
+  <div style="font-size:14px;margin-top:12px">A LITTLE CORNER OF THE WORLD JUST FOR YOU</div>
+  <h1>A Jar Full of You 💌</h1>
+  <p>For my pretty Princess. A little collection of love, soft moments, and reminders that you never have to do life alone.</p>
+  <div>Made with love, just for you ♡</div>
+</header>
+
+<main>
+<section class="paper" style="text-align:center">
+  <div class="jar">🫙💌</div>
+  <h2>Your little love-note jar</h2>
+  <p>Pick a note, pretty girl. I put a little piece of my heart in here for you.</p>
+  <div id="note" aria-live="polite">Your next little reminder is waiting, Princess. ♡</div>
+  <button class="primary" onclick="openNote()">Open a love note 💗</button>
+  <button onclick="openNote()">Another one!</button>
+</section>
+
+<section class="paper">
+  <h2>Open when… ✉️</h2>
+  <p>Whatever kind of day you're having, there's a little letter for it.</p>
+  <button class="pill" onclick="letter('miss')">You miss me</button>
+  <button class="pill" onclick="letter('hard')">Today's been hard</button>
+  <button class="pill" onclick="letter('doubt')">You need reassurance</button>
+  <button class="pill" onclick="letter('tired')">You're overwhelmed</button>
+  <div id="letter" class="hidden">
+    <div id="letterText"></div>
+    <button onclick="document.getElementById('letter').classList.add('hidden')">Fold this letter ♡</button>
+  </div>
+</section>
+
+<section class="paper">
+  <h2>Little reasons I adore you ✨</h2>
+  <div id="reason">Your goofy little moments deserve their own scrapbook page.</div>
+  <button onclick="reason()">Give me a reason ♡</button>
+</section>
+
+<section class="paper" style="text-align:center">
+  <div style="font-size:35px">🎀 💌 ☁️</div>
+  <h2>A tiny secret for Princess</h2>
+  <p>Some surprises are hiding in plain sight. Ready?</p>
+  <button class="primary" onclick="surprise()">Tap for your surprise ✨</button>
+  <p id="secret" class="hidden" style="line-height:1.8">Plot twist, Princess: you're stuck with someone who wants to make you smile, hype you up, and lovingly annoy you for a very, very long time. No refunds. I love you. ♡</p>
+</section>
+</main>
+
+<footer>Collected with love, one little note at a time. ♡</footer>
+
+<script>
+const notes=[
+"Princess, I hope you know you don't have to earn tenderness from me. You deserve it simply because you're you. ♡",
+"Official reminder: you're cute. This is not a debate. The committee has spoken. 🎀",
+"Even on the days you don't feel like your best self, there's still so much about you worth loving.",
+"I hope life is gentle with you today. And if it isn't, I hope you remember you have someone cheering for you.",
+"You're allowed to rest, to take your time, and to figure things out one little step at a time. I'm rooting for you.",
+"Somehow you became one of my favorite parts of a day without even trying. That's pretty special, baby.",
+"If I could put a hug in this little jar, you'd never run out. So consider this your digital one. 🫂"
+];
+const reasons=[
+"Your goofy side makes ordinary moments feel special.",
+"You deserve to be celebrated for the little things, too.",
+"I love that there's always something new to learn about you.",
+"You don't have to be perfect to be precious to me.",
+"You make me want to show up with care, not just words."
+];
+function openNote(){
+ const n=notes[Math.floor(Math.random()*notes.length)];
+ document.getElementById('note').textContent=n;
+}
+function letter(type){
+ const letters={
+ miss:"If you miss me right now, take a breath and imagine me giving you the longest hug. Distance can make a moment feel bigger, but you are loved in the middle of it, too. ♡",
+ hard:"Baby, you don't have to solve your whole world tonight. Take the next small step, get some water, breathe, and give yourself the kindness you'd give somebody you love. I'm in your corner.",
+ doubt:"Pretty Princess, you don't need to guess whether you matter. Your feelings matter, your voice matters, and you deserve patience, honesty, and care. You are worth showing up for. ♡",
+ tired:"You can put the heavy things down for a minute, baby. Rest is not falling behind. You are a person, not a machine, and you deserve a soft place to land."
+ };
+ document.getElementById('letterText').textContent=letters[type];
+ document.getElementById('letter').classList.remove('hidden');
+}
+function reason(){
+ document.getElementById('reason').textContent=reasons[Math.floor(Math.random()*reasons.length)];
+}
+function surprise(){
+ document.getElementById('secret').classList.remove('hidden');
+}
+</script>
+</body>
+</html>

@@ -3,115 +3,427 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#f9e7f0">
-<title>A Jar Full of You 💌</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#fce9f4">
+<title>A Little Date for Princess ♡</title>
 <style>
-*{box-sizing:border-box}
-body{margin:0;background:#fff9fc;color:#57475a;font-family:Georgia,serif}
-header{text-align:center;padding:32px 18px 22px;background:linear-gradient(145deg,#f9e4ef,#e3efff)}
-h1{font-size:clamp(30px,8vw,43px);margin:10px 0;color:#986d91}
-header p{line-height:1.7;margin:8px auto;max-width:320px}
-.sticker{font-size:27px;letter-spacing:8px}
-main{max-width:520px;margin:auto;padding:18px}
-.paper{background:#fff;border:1px solid #f0dce9;border-radius:20px;padding:20px;margin:16px 0;box-shadow:0 5px 16px #bd98b31b}
-h2{color:#9a7197;font-size:23px;margin:0 0 12px}
-button{border:0;border-radius:22px;padding:13px 17px;background:#e8dafa;color:#644f78;font-size:15px;font-weight:bold;cursor:pointer;margin:5px 3px}
-button:active{transform:scale(.97)}
-.primary{background:#f3d5e5;color:#875a78}
-.jar{font-size:72px;text-align:center;margin:8px}
-#note{background:#fff6fb;border:1px dashed #d9afcd;padding:20px;border-radius:15px;line-height:1.8;text-align:center;min-height:90px;margin:12px 0}
-.pill{background:#e7efff;color:#61749d}
-.hidden{display:none}
-footer{text-align:center;padding:24px;color:#a68ba4;font-size:13px}
+:root {
+  --pink: #f6d9e9;
+  --pink-dark: #c879a6;
+  --lavender: #e7def9;
+  --purple: #80639e;
+  --paper: #fffafc;
+  --ink: #694e67;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  padding: 24px 14px 45px;
+  color: var(--ink);
+  font-family: "Trebuchet MS", Arial, sans-serif;
+  background:
+    radial-gradient(circle at 10% 15%, #ffffffb8 0 3px, transparent 4px),
+    radial-gradient(circle at 85% 35%, #ffffffb8 0 4px, transparent 5px),
+    linear-gradient(140deg, #fff0f7, #f1eaff 52%, #fff5f8);
+  background-size: 70px 70px, 95px 95px, auto;
+}
+button { font: inherit; cursor: pointer; }
+button:focus-visible {
+  outline: 3px solid var(--purple);
+  outline-offset: 3px;
+}
+.page { max-width: 720px; margin: auto; }
+.topline {
+  text-align: center;
+  color: var(--purple);
+  letter-spacing: 3px;
+  font-size: .75rem;
+  font-weight: bold;
+  margin: 4px 0 18px;
+}
+.scrapbook {
+  position: relative;
+  background: var(--paper);
+  border: 1px solid #efd8e7;
+  border-radius: 8px 20px 12px 22px;
+  padding: 28px 22px;
+  box-shadow: 0 12px 32px #b78bac25;
+  transform: rotate(-.25deg);
+}
+.tape {
+  position: absolute;
+  top: -11px;
+  left: calc(50% - 48px);
+  width: 96px;
+  height: 25px;
+  background: #e8dcfaad;
+  transform: rotate(-3deg);
+  border: 1px solid #ffffff80;
+}
+.sticker {
+  position: absolute;
+  font-size: 1.8rem;
+  user-select: none;
+}
+.sticker.one { top: 23px; right: 18px; transform: rotate(12deg); }
+.sticker.two { bottom: 20px; left: 13px; transform: rotate(-14deg); }
+.eyebrow {
+  text-align: center;
+  font-size: .75rem;
+  letter-spacing: 2px;
+  color: var(--pink-dark);
+  font-weight: bold;
+  margin-top: 8px;
+}
+h1, h2 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: normal;
+}
+h1 {
+  text-align: center;
+  color: #a3638c;
+  font-size: clamp(2rem, 8vw, 3.25rem);
+  margin: 12px 0;
+}
+.subtitle { text-align: center; line-height: 1.7; }
+.doodle { text-align: center; color: #c17ca5; font-size: 1.1rem; margin: 15px 0; }
+.letter {
+  background: #fff3f8;
+  border: 1px dashed #dfb4ce;
+  border-radius: 14px;
+  padding: 19px;
+  line-height: 1.8;
+  margin: 22px 0;
+}
+.letter p { margin: 8px 0 13px; }
+.letter .signoff { text-align: right; color: #a3638c; font-family: Georgia, serif; }
+.section {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px dashed #dfc8df;
+}
+h2 { text-align: center; color: #986b9e; font-size: 1.65rem; margin: 5px 0 10px; }
+.hint { text-align: center; font-size: .92rem; line-height: 1.6; }
+.choices { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 18px; }
+.choice {
+  padding: 17px 10px;
+  background: #fff;
+  color: var(--ink);
+  border: 2px solid #ead8ef;
+  border-radius: 16px;
+  transition: transform .18s, background .18s, border-color .18s;
+}
+.choice:hover { transform: translateY(-3px) rotate(-1deg); }
+.choice.selected { background: #fce5f2; border-color: #c879a6; }
+.choice strong { display: block; font-size: 1.12rem; margin-bottom: 5px; }
+.choice span { font-size: .8rem; }
+.result {
+  display: none;
+  background: #f0e9fc;
+  border-radius: 12px;
+  padding: 14px;
+  text-align: center;
+  line-height: 1.6;
+  margin-top: 14px;
+}
+.result.show { display: block; animation: pop .3s ease-out; }
+@keyframes pop {
+  from { opacity: 0; transform: scale(.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+.envelope-wrap { text-align: center; padding: 12px 0 4px; }
+.envelope {
+  position: relative;
+  display: block;
+  width: min(250px, 80%);
+  height: 150px;
+  margin: 22px auto 14px;
+  border: 0;
+  background: transparent;
+  perspective: 600px;
+}
+.env-body {
+  position: absolute;
+  inset: 20px 0 0;
+  background: #e9dafa;
+  border: 1px solid #cbb6e6;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.env-body::before, .env-body::after {
+  content: "";
+  position: absolute;
+  bottom: -3px;
+  width: 0; height: 0;
+  border-top: 65px solid transparent;
+}
+.env-body::before {
+  left: 0;
+  border-right: 126px solid #d8c5f0;
+}
+.env-body::after {
+  right: 0;
+  border-left: 126px solid #cdb7e9;
+}
+.flap {
+  position: absolute;
+  z-index: 3;
+  top: 20px;
+  left: 0;
+  width: 0; height: 0;
+  border-left: 125px solid transparent;
+  border-right: 125px solid transparent;
+  border-top: 82px solid #c9b2e6;
+  transform-origin: top center;
+  transition: transform .55s ease;
+}
+.seal {
+  position: absolute;
+  z-index: 4;
+  top: 65px; left: calc(50% - 19px);
+  display: grid; place-items: center;
+  width: 38px; height: 38px;
+  background: #d78eb5; color: white;
+  border: 2px solid #fff1f8;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  transition: opacity .2s;
+}
+.envelope.open .flap { transform: rotateX(180deg); }
+.envelope.open .seal { opacity: 0; }
+.envelope-label { color: #a3638c; font-size: .9rem; }
+.letter-reveal {
+  display: none;
+  text-align: left;
+  line-height: 1.8;
+  background: #fff3f8;
+  border: 1px dashed #d9b4d0;
+  border-radius: 14px;
+  padding: 18px;
+  margin-top: 16px;
+}
+.letter-reveal.show { display: block; animation: pop .35s ease-out; }
+.note-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 11px; margin-top: 17px; }
+.note {
+  min-height: 94px;
+  padding: 14px 10px;
+  border: 1px solid #e7d8ef;
+  border-radius: 10px;
+  background: #f4efff;
+  color: #775c8b;
+  line-height: 1.5;
+  box-shadow: 2px 3px 0 #e6d8ef;
+}
+.note:nth-child(2n) { background: #fff0f7; border-color: #f0d4e4; color: #9c6688; transform: rotate(1deg); }
+.note span { display: block; font-size: 1.4rem; margin-bottom: 5px; }
+.note-message {
+  display: none;
+  margin-top: 14px;
+  border-radius: 12px;
+  background: #fff4fa;
+  border: 1px dashed #e3bfd6;
+  padding: 16px;
+  text-align: center;
+  line-height: 1.7;
+}
+.note-message.show { display: block; animation: pop .25s ease-out; }
+.surprise-button, .main-button {
+  border: 0;
+  border-radius: 999px;
+  background: #c17ba7;
+  color: white;
+  padding: 13px 20px;
+  box-shadow: 0 4px 0 #a86491;
+  transition: transform .15s;
+}
+.surprise-button:active, .main-button:active { transform: translateY(3px); box-shadow: none; }
+.surprise-result { display: none; margin-top: 15px; padding: 15px; background: #fff0f7; border-radius: 12px; line-height: 1.7; }
+.surprise-result.show { display: block; }
+.footer { text-align: center; padding: 28px 6px 0; font-size: .86rem; line-height: 1.8; color: #8b7095; }
+.tiny { font-size: .76rem; opacity: .8; }
+@media (max-width: 420px) {
+  body { padding: 19px 10px 32px; }
+  .scrapbook { padding: 24px 15px; }
+  .letter { padding: 15px; }
+  .note-grid { gap: 9px; }
+  .note { padding: 12px 8px; font-size: .9rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
 </style>
 </head>
 <body>
-<header>
-  <div class="sticker">♡ ✦ 🎀 ✦ ♡</div>
-  <div style="font-size:14px;margin-top:12px">A LITTLE CORNER OF THE WORLD JUST FOR YOU</div>
-  <h1>A Jar Full of You 💌</h1>
-  <p>For my pretty Princess. A little collection of love, soft moments, and reminders that you never have to do life alone.</p>
-  <div>Made with love, just for you ♡</div>
-</header>
+<main class="page">
+  <div class="topline">♡ A LITTLE SOMETHING FOR MY PRINCESS ♡</div>
 
-<main>
-<section class="paper" style="text-align:center">
-  <div class="jar">🫙💌</div>
-  <h2>Your little love-note jar</h2>
-  <p>Pick a note, pretty girl. I put a little piece of my heart in here for you.</p>
-  <div id="note" aria-live="polite">Your next little reminder is waiting, Princess. ♡</div>
-  <button class="primary" onclick="openNote()">Open a love note 💗</button>
-  <button onclick="openNote()">Another one!</button>
-</section>
+  <article class="scrapbook">
+    <div class="tape" aria-hidden="true"></div>
+    <span class="sticker one" aria-hidden="true">💗</span>
+    <span class="sticker two" aria-hidden="true">✿</span>
 
-<section class="paper">
-  <h2>Open when… ✉️</h2>
-  <p>Whatever kind of day you're having, there's a little letter for it.</p>
-  <button class="pill" onclick="letter('miss')">You miss me</button>
-  <button class="pill" onclick="letter('hard')">Today's been hard</button>
-  <button class="pill" onclick="letter('doubt')">You need reassurance</button>
-  <button class="pill" onclick="letter('tired')">You're overwhelmed</button>
-  <div id="letter" class="hidden">
-    <div id="letterText"></div>
-    <button onclick="document.getElementById('letter').classList.add('hidden')">Fold this letter ♡</button>
-  </div>
-</section>
+    <div class="eyebrow">A NOTE FROM YOUR GIRL</div>
+    <h1>Princess, pick a day ♡</h1>
+    <div class="subtitle">
+      I have a tiny surprise for us… 👀<br>
+      And no, ma'am, you cannot guess it yet. 😂
+    </div>
+    <div class="doodle" aria-hidden="true">♡ ── ✧ ── ♡</div>
 
-<section class="paper">
-  <h2>Little reasons I adore you ✨</h2>
-  <div id="reason">Your goofy little moments deserve their own scrapbook page.</div>
-  <button onclick="reason()">Give me a reason ♡</button>
-</section>
+    <section class="letter">
+      <p>Babyyyy, guess whattt? 🥹💕</p>
+      <p>Your girl wants to take you on a little date! Since I can't just reach through this screen and steal you away for a date in person yet, we're gonna make this long-distance thing work our way.</p>
+      <p>I want us to have a little time that's just for us, make a cute memory together, and give you something to smile about. I'm keeping the actual plans a secret for now, so don't be trying to investigate me, ma'am. 😭😂</p>
+      <p>But first, I need you to help me choose one little thing…</p>
+      <p class="signoff">Love, your girl ♡</p>
+    </section>
 
-<section class="paper" style="text-align:center">
-  <div style="font-size:35px">🎀 💌 ☁️</div>
-  <h2>A tiny secret for Princess</h2>
-  <p>Some surprises are hiding in plain sight. Ready?</p>
-  <button class="primary" onclick="surprise()">Tap for your surprise ✨</button>
-  <p id="secret" class="hidden" style="line-height:1.8">Plot twist, Princess: you're stuck with someone who wants to make you smile, hype you up, and lovingly annoy you for a very, very long time. No refunds. I love you. ♡</p>
-</section>
+    <section class="section" id="choose-day">
+      <h2>When am I taking you out? 💌</h2>
+      <p class="hint">Pick the day that works best for you, pretty girl.</p>
+      <div class="choices">
+        <button class="choice" data-day="Friday" aria-pressed="false">
+          <strong>🌷 Friday</strong>
+          <span>A little date with me</span>
+        </button>
+        <button class="choice" data-day="Saturday" aria-pressed="false">
+          <strong>🎀 Saturday</strong>
+          <span>Just us, pretty girl</span>
+        </button>
+      </div>
+      <div class="result" id="day-result" aria-live="polite"></div>
+    </section>
+
+    <section class="section">
+      <h2>A little envelope for you 💌</h2>
+      <p class="hint">I put something in here for you. Tap the envelope to open it.</p>
+      <div class="envelope-wrap">
+        <button class="envelope" id="envelope" aria-label="Open your love letter" aria-expanded="false">
+          <span class="env-body"></span>
+          <span class="flap"></span>
+          <span class="seal">♥</span>
+        </button>
+        <div class="envelope-label" id="envelope-label">Tap me, Princess ♡</div>
+      </div>
+      <div class="letter-reveal" id="envelope-letter" aria-live="polite">
+        <strong>To my pretty Princess, 🩷</strong>
+        <p>I know we're still learning each other, and that's one of the things I like about this. I get to discover more of you little by little, laugh with you, talk to you, and see what we're becoming.</p>
+        <p>I'm not trying to rush us. I just want to be intentional with you, enjoy what we're building, and keep giving us reasons to smile. And nowww, I get to plan a date for us too. 🤭💕</p>
+        <p>You're kinda special to me, you know that? Don't let it go to your head though. 😂</p>
+        <p class="signoff">♡ Your girl</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Little things I need you to know ✨</h2>
+      <p class="hint">Tap a note. I may or may not be blushing while you read these. 😭</p>
+      <div class="note-grid">
+        <button class="note" data-note="feelings"><span>💗</span>Something on my mind</button>
+        <button class="note" data-note="cute"><span>🤭</span>A tiny confession</button>
+        <button class="note" data-note="us"><span>🫶</span>About us</button>
+        <button class="note" data-note="flirt"><span>😘</span>Don't get shy now</button>
+      </div>
+      <div class="note-message" id="note-message" aria-live="polite"></div>
+    </section>
+
+    <section class="section" style="text-align:center">
+      <h2>Psst… wanna know something? 👀</h2>
+      <p class="hint">This button may or may not contain a clue. Don't get too excited now. 😂</p>
+      <button class="surprise-button" id="surprise">Okay, tell meee 💌</button>
+      <div class="surprise-result" id="surprise-result" aria-live="polite"></div>
+    </section>
+
+    <section class="section">
+      <h2>One last thing, Princess ♡</h2>
+      <p class="hint">No matter which day you choose, the point is getting a little time together, laughing at whatever nonsense we get into, and making a memory that's ours. Distance can have us for now, but it doesn't get to stop us from being intentional. 🥹🩷</p>
+      <div class="doodle" aria-hidden="true">✧ ♡ ✧</div>
+    </section>
+  </article>
+
+  <footer class="footer">
+    made with a little blush, a lot of thought, and a tiny bit of silliness ♡
+    <div class="tiny">For Princess, from your girl 💌</div>
+  </footer>
 </main>
 
-<footer>Collected with love, one little note at a time. ♡</footer>
-
 <script>
-const notes=[
-"Princess, I hope you know you don't have to earn tenderness from me. You deserve it simply because you're you. ♡",
-"Official reminder: you're cute. This is not a debate. The committee has spoken. 🎀",
-"Even on the days you don't feel like your best self, there's still so much about you worth loving.",
-"I hope life is gentle with you today. And if it isn't, I hope you remember you have someone cheering for you.",
-"You're allowed to rest, to take your time, and to figure things out one little step at a time. I'm rooting for you.",
-"Somehow you became one of my favorite parts of a day without even trying. That's pretty special, baby.",
-"If I could put a hug in this little jar, you'd never run out. So consider this your digital one. 🫂"
+const dayButtons = document.querySelectorAll(".choice");
+const dayResult = document.getElementById("day-result");
+
+dayButtons.forEach(button => {
+  button.addEventListener("click", () => {
+    const day = button.dataset.day;
+    dayButtons.forEach(other => {
+      const selected = other === button;
+      other.classList.toggle("selected", selected);
+      other.setAttribute("aria-pressed", String(selected));
+    });
+    dayResult.innerHTML =
+      `<strong>${day} it is? 💗</strong><br>` +
+      `Okayyy, pretty Princess! I shall plan accordingly. 🤭 ` +
+      `The rest is still a secret, so no interrogations yet, ma'am. 😂`;
+    dayResult.classList.add("show");
+  });
+});
+
+const envelope = document.getElementById("envelope");
+const envelopeLetter = document.getElementById("envelope-letter");
+const envelopeLabel = document.getElementById("envelope-label");
+envelope.addEventListener("click", () => {
+  const opened = envelope.classList.toggle("open");
+  envelopeLetter.classList.toggle("show", opened);
+  envelope.setAttribute("aria-expanded", String(opened));
+  envelopeLabel.textContent = opened
+    ? "A little note, just for you ♡"
+    : "Tap me, Princess ♡";
+});
+
+const notes = {
+  feelings: {
+    title: "A little confession 💗",
+    text: "I'm catching myself smiling at my phone because of you, and honestly? It's a little embarrassing. 😭😂 But I like getting to know you, and I like how this is growing."
+  },
+  cute: {
+    title: "Don't let it go to your head 🤭",
+    text: "You have me being all smiley and stuff. Like ma'am, what am I supposed to do with all these butterflies? Please be serious. 😂💕"
+  },
+  us: {
+    title: "Us, at our own pace 🫶",
+    text: "I like what we're building, and I want us to keep learning each other without rushing. Let's keep being honest, showing up, and making this ours one little moment at a time."
+  },
+  flirt: {
+    title: "Respectfully… 😘",
+    text: "You really be looking all cute and being all you, then expect me to just act regular. That's actually so unfair, Princess. I would like to file a complaint. 😭💗"
+  }
+};
+
+const noteMessage = document.getElementById("note-message");
+document.querySelectorAll(".note").forEach(button => {
+  button.addEventListener("click", () => {
+    const note = notes[button.dataset.note];
+    noteMessage.innerHTML = `<strong>${note.title}</strong><p>${note.text}</p>`;
+    noteMessage.classList.add("show");
+  });
+});
+
+const surpriseButton = document.getElementById("surprise");
+const surpriseResult = document.getElementById("surprise-result");
+const clues = [
+  "Clue number one: you get my attention all to yourself for a little while. 🥹💕",
+  "Clue number two: there may be some laughing, some flirting, and me being a little shy. Don't quote me. 😂",
+  "Clue number three: the plans are secret, but the company is already my favorite part. 🤭💗",
+  "Last clue: just show up as yourself, pretty girl. That's all I need. ♡"
 ];
-const reasons=[
-"Your goofy side makes ordinary moments feel special.",
-"You deserve to be celebrated for the little things, too.",
-"I love that there's always something new to learn about you.",
-"You don't have to be perfect to be precious to me.",
-"You make me want to show up with care, not just words."
-];
-function openNote(){
- const n=notes[Math.floor(Math.random()*notes.length)];
- document.getElementById('note').textContent=n;
-}
-function letter(type){
- const letters={
- miss:"If you miss me right now, take a breath and imagine me giving you the longest hug. Distance can make a moment feel bigger, but you are loved in the middle of it, too. ♡",
- hard:"Baby, you don't have to solve your whole world tonight. Take the next small step, get some water, breathe, and give yourself the kindness you'd give somebody you love. I'm in your corner.",
- doubt:"Pretty Princess, you don't need to guess whether you matter. Your feelings matter, your voice matters, and you deserve patience, honesty, and care. You are worth showing up for. ♡",
- tired:"You can put the heavy things down for a minute, baby. Rest is not falling behind. You are a person, not a machine, and you deserve a soft place to land."
- };
- document.getElementById('letterText').textContent=letters[type];
- document.getElementById('letter').classList.remove('hidden');
-}
-function reason(){
- document.getElementById('reason').textContent=reasons[Math.floor(Math.random()*reasons.length)];
-}
-function surprise(){
- document.getElementById('secret').classList.remove('hidden');
-}
+let clueIndex = 0;
+surpriseButton.addEventListener("click", () => {
+  surpriseResult.textContent = clues[clueIndex];
+  surpriseResult.classList.add("show");
+  clueIndex = (clueIndex + 1) % clues.length;
+  surpriseButton.textContent = clueIndex === 0
+    ? "Read a clue again? 👀"
+    : "One more clueee? 🤭";
+});
 </script>
 </body>
 </html>
